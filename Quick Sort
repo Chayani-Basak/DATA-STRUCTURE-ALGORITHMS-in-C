@@ -1,0 +1,48 @@
+#include<stdio.h>
+void quicksort(int a[],int lower,int upper);
+int partition(int c[],int low,int up);
+int main()
+{
+	int i,n,b[100];
+	printf("Enter number of elements of array:");
+	scanf("%d",&n);
+	printf("\nEnter array elements:");
+	for(i=0;i<n;i++)
+	{
+		scanf("  %d",&b[i]);
+	}
+	quicksort(b,0,(n-1));
+	printf("\nResultant array:");
+	for (i=0;i<n;i++)
+	{
+		printf("  %d",b[i]);
+	}
+}
+void quicksort(int a[],int lower,int upper)
+{
+	int k;
+	if (upper>lower)
+	{
+		k=partition(a,lower,upper);
+		quicksort(a,lower,(k-1));
+		quicksort(a,(k+1),upper);
+	}
+}
+int partition(int c[],int low,int up)
+{
+	int p=low,q=(up+1),i=c[low],temp;
+	while(q>=p) 
+	{
+		while (c[++p]<i);
+		while (c[--q]>i);
+		if (q>p)
+		{
+		temp=c[p];
+		c[p]=c[q];
+		c[q]=temp;
+		}
+	}
+	c[low]=c[q];
+	c[q]=i;
+	return(q);
+}
